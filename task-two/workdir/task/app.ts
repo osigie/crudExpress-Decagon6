@@ -9,6 +9,10 @@ const taskOne = (passengers: number, shuffle: number) => {
   let board: CustumType[] = [];
   let locations = ["Abuja", "Benue", "Lagos", "Katsina", "Sambisa"];
 
+  if (passengers === 0) {
+    throw Error("Passengers must be greater than 0");
+  }
+
   for (let i = 0; i < passengers; i++) {
     reserve.push({
       name: `passenger${i + 1}`,
@@ -30,12 +34,11 @@ const taskOne = (passengers: number, shuffle: number) => {
       passengers = passengers - 50;
     }
   }
-  // res = actual.slice(newE.length, passengers);
   return {
     boarded: board,
     reservation: reserve,
     count: count,
   };
 };
-taskOne(150, 3);
+
 export default taskOne;

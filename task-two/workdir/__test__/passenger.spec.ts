@@ -93,5 +93,26 @@ describe("test for boarded value", () => {
   let shuffle = 0;
 
   const expected = taskOne(passengers, shuffle);
-  expect(expected.boarded).toStrictEqual(prefilled)
+  expect(expected.boarded).toStrictEqual(prefilled);
+});
+
+test("throws on passengers equal to zero", () => {
+  expect(() => {
+    taskOne(0, 4);
+  }).toThrow();
+});
+
+describe("test for large input", () => {
+  test("should solve large passengers", () => {
+    let passengers = 600;
+    let shuffle = 3;
+    const expected = taskOne(passengers, shuffle);
+    expect(expected.boarded.length).toBe(50);
+    expect(expected.boarded[49]).toStrictEqual({
+      name: "passenger200",
+      location: expect.any(String),
+    });
+    expect(expected.reservation.length).toBe(400);
+    expect(expected.count).toBe(4);
+  });
 });
