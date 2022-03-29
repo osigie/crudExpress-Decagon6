@@ -69,7 +69,7 @@ For every extra trip taken shuffle count is decremented while for every trip cou
            {name:"passenger5", location:"Sambisa"},
            {name:"passenger6", location:"Abuja"},
            {name:"passenger7", location:"Benue"},
-           {name:"passenger8", location:"Lagos"},
+           {name:"passenger8", location:"Lagos"},;
            {name:"passenger9", location:"Katsina"},
            {name:"passenger10", location:"Sambisa"},
         ],

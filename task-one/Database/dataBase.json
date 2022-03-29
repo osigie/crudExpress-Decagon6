@@ -1,0 +1,94 @@
+[
+   {
+      "organization": "node ninja",
+      "createdAt": "2020-08-12T19:04:55.455Z",
+      "updatedAt": "2022-03-29T18:09:58.342Z",
+      "products": [
+         "developers",
+         "pizza"
+      ],
+      "marketValue": 3,
+      "address": "sangotedo",
+      "ceo": "cn",
+      "country": "Taiwan",
+      "id": 1,
+      "noOfEmployees": 2,
+      "employees": [
+         "james bond",
+         "jackie chan"
+      ]
+   },
+   {
+      "organization": "node ninja",
+      "createdAt": "2022-03-29T18:18:04.977Z",
+      "updatedAt": "2022-03-29T18:18:04.977Z",
+      "products": [
+         "developers",
+         "pizza"
+      ],
+      "marketValue": "90%",
+      "address": "sangotedo",
+      "ceo": "cn",
+      "country": "Taiwan",
+      "id": 2,
+      "noOfEmployees": 2,
+      "employees": [
+         "james bond",
+         "jackie chan"
+      ]
+   },
+   {
+      "organization": "node ninja",
+      "createdAt": "2022-03-29T18:18:06.461Z",
+      "updatedAt": "2022-03-29T18:18:06.461Z",
+      "products": [
+         "developers",
+         "pizza"
+      ],
+      "marketValue": "90%",
+      "address": "sangotedo",
+      "ceo": "cn",
+      "country": "Taiwan",
+      "id": 3,
+      "noOfEmployees": 2,
+      "employees": [
+         "james bond",
+         "jackie chan"
+      ]
+   },
+   {
+      "organization": "node ninja",
+      "createdAt": "2020-08-12T19:04:55.455Z",
+      "updatedAt": "2022-03-29T18:18:47.839Z",
+      "products": 4,
+      "marketValue": "90%",
+      "address": "sangotedo",
+      "ceo": "cn",
+      "country": "Taiwan",
+      "id": 4,
+      "noOfEmployees": 2,
+      "employees": [
+         "james bond",
+         "jackie chan"
+      ]
+   },
+   {
+      "organization": "node ninja",
+      "createdAt": "2022-03-29T18:18:07.521Z",
+      "updatedAt": "2022-03-29T18:18:07.521Z",
+      "products": [
+         "developers",
+         "pizza"
+      ],
+      "marketValue": "90%",
+      "address": "sangotedo",
+      "ceo": "cn",
+      "country": "Taiwan",
+      "id": 5,
+      "noOfEmployees": 2,
+      "employees": [
+         "james bond",
+         "jackie chan"
+      ]
+   }
+]
