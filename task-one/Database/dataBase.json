@@ -1,8 +1,8 @@
 [
    {
       "organization": "node ninja",
-      "createdAt": "2022-03-30T14:57:17.878Z",
-      "updatedAt": "2022-03-30T14:57:17.878Z",
+      "createdAt": "2022-03-30T20:49:38.704Z",
+      "updatedAt": "2022-03-30T20:49:38.722Z",
       "products": [
          "developers",
          "pizza"
@@ -14,7 +14,84 @@
       "id": 1,
       "noOfEmployees": 2,
       "employees": [
-         "james bond"
+         "james bond",
+         "jackie chan"
+      ]
+   },
+   {
+      "organization": "node ninja",
+      "createdAt": "2022-03-30T20:52:03.121Z",
+      "updatedAt": "2022-03-30T20:52:03.121Z",
+      "products": [
+         "developers",
+         "pizza"
+      ],
+      "marketValue": "90%",
+      "address": "sangotedo",
+      "ceo": "cn",
+      "country": "Taiwan",
+      "id": 2,
+      "noOfEmployees": 2,
+      "employees": [
+         "james bond",
+         "jackie chan"
+      ]
+   },
+   {
+      "organization": "node ninja",
+      "createdAt": "2022-03-30T20:52:06.645Z",
+      "updatedAt": "2022-03-30T20:52:06.645Z",
+      "products": [
+         "developers",
+         "pizza"
+      ],
+      "marketValue": "90%",
+      "address": "sangotedo",
+      "ceo": "cn",
+      "country": "Taiwan",
+      "id": 3,
+      "noOfEmployees": 2,
+      "employees": [
+         "james bond",
+         "jackie chan"
+      ]
+   },
+   {
+      "organization": "node ninja",
+      "createdAt": "2022-03-30T20:52:07.365Z",
+      "updatedAt": "2022-03-30T20:52:07.365Z",
+      "products": [
+         "developers",
+         "pizza"
+      ],
+      "marketValue": "90%",
+      "address": "sangotedo",
+      "ceo": "cn",
+      "country": "Taiwan",
+      "id": 4,
+      "noOfEmployees": 2,
+      "employees": [
+         "james bond",
+         "jackie chan"
+      ]
+   },
+   {
+      "organization": "node ninja",
+      "createdAt": "2022-03-30T20:52:07.864Z",
+      "updatedAt": "2022-03-30T20:52:07.864Z",
+      "products": [
+         "developers",
+         "pizza"
+      ],
+      "marketValue": "90%",
+      "address": "sangotedo",
+      "ceo": "cn",
+      "country": "Taiwan",
+      "id": 5,
+      "noOfEmployees": 2,
+      "employees": [
+         "james bond",
+         "jackie chan"
       ]
    }
 ]

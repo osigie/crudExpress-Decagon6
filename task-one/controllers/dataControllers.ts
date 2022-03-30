@@ -36,92 +36,112 @@ const reader = async () => {
   try {
     dB = await fss.readFile(pathOfData, { encoding: "utf-8" });
   } catch (err) {
-    console.log(err);
+    dB = JSON.stringify([]);
   }
   return JSON.parse(dB);
 };
 
 export const getAll = async (req: Request, res: Response) => {
-  const dB = await reader();
-  res.status(200).json({
-    status: "succes",
-    data: {
-      dB,
-    },
-  });
+  try {
+    const dB = await reader();
+    res.status(200).json({
+      status: "succes",
+      data: {
+        dB,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getSingle = async (req: Request, res: Response) => {
-  const dB = await reader();
-  const id: number = Number(req.params.id);
-  const singleDb = dB.find((el: DataBaseObject) => el.id === id);
-  res.status(200).json({
-    status: "succes",
-    data: {
-      singleData: singleDb,
-    },
-  });
+  try {
+    const dB = await reader();
+    const id: number = Number(req.params.id);
+    const singleDb = dB.find((el: DataBaseObject) => el.id === id);
+    res.status(200).json({
+      status: "succes",
+      data: {
+        singleData: singleDb,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const createData = async (req: Request, res: Response) => {
-  const dB = await reader();
-  let id;
-  if (dB.length == 0) {
-    id = 1;
-  } else {
-    id = dB[dB.length - 1].id + 1;
-  }
-  const newObj = Object.assign(
-    req.body,
-    { createdAt: new Date().toISOString() },
-    { updatedAt: new Date().toISOString() },
-    { id: id }
-  );
+  try {
+    const dB = await reader();
+    let id;
+    if (dB.length == 0) {
+      id = 1;
+    } else {
+      id = dB[dB.length - 1].id + 1;
+    }
+    const newObj = Object.assign(
+      req.body,
+      { createdAt: new Date().toISOString() },
+      { updatedAt: new Date().toISOString() },
+      { id: id }
+    );
 
-  dB.push(newObj);
-  fs.writeFile(pathOfData, JSON.stringify(dB, null, 3), (err) => {
-    res.status(201).json({
-      status: "success",
-      data: {
-        new: newObj,
-      },
+    dB.push(newObj);
+    fs.writeFile(pathOfData, JSON.stringify(dB, null, 3), (err) => {
+      res.status(201).json({
+        status: "success",
+        data: {
+          new: newObj,
+        },
+      });
     });
-  });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const updateData = async (req: Request, res: Response) => {
-  const dB = await reader();
-  const id: number = Number(req.params.id);
-  const index = dB.findIndex((p: DataBaseObject) => p.id === id);
+  try {
+    const dB = await reader();
+    const id: number = Number(req.params.id);
+    const index = dB.findIndex((p: DataBaseObject) => p.id === id);
 
-  let sample = {
-    ...dB[index],
-    ...req.body,
-    createdAt: dB[index].createdAt,
-    id,
-    updatedAt: new Date().toISOString(),
-  };
-  dB[index] = sample;
-  fs.writeFile(pathOfData, JSON.stringify(dB, null, 3), (err) => {
-    res.status(201).json({
-      status: "success",
-      data: {
-        updated: sample,
-      },
+    let sample = {
+      ...dB[index],
+      ...req.body,
+      createdAt: dB[index].createdAt,
+      id,
+      updatedAt: new Date().toISOString(),
+    };
+    dB[index] = sample;
+    fs.writeFile(pathOfData, JSON.stringify(dB, null, 3), (err) => {
+      res.status(201).json({
+        status: "success",
+        data: {
+          updated: sample,
+        },
+      });
     });
-  });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const deleteData = async (req: Request, res: Response) => {
-  let dB = await reader();
-  const id: number = Number(req.params.id);
-  dB = dB.filter((el: DataBaseObject) => el.id !== id);
-  fs.writeFile(pathOfData, JSON.stringify(dB, null, 3), (err) => {
-    res.status(201).json({
-      status: "success",
-      msg: "succesfully removed",
+  try {
+    let dB = await reader();
+    const id: number = Number(req.params.id);
+    dB = dB.filter((el: DataBaseObject) => el.id !== id);
+    fs.writeFile(pathOfData, JSON.stringify(dB, null, 3), (err) => {
+      res.status(201).json({
+        status: "success",
+        msg: "succesfully removed",
+      });
     });
-  });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //Creating Middleware for wrong ID
@@ -130,15 +150,19 @@ export const checkID = async (
   res: Response,
   next: NextFunction
 ) => {
-  const dB = await reader();
-  const id: number = Number(req.params.id);
-  if (!dB.some((el: DataBaseObject) => el.id === id)) {
-    return res.status(404).json({
-      status: "failed",
-      msg: "invalid ID",
-    });
+  try {
+    const dB = await reader();
+    const id: number = Number(req.params.id);
+    if (!dB.some((el: DataBaseObject) => el.id === id)) {
+      return res.status(404).json({
+        status: "failed",
+        msg: "invalid ID",
+      });
+    }
+    next();
+  } catch (error) {
+    console.log(error);
   }
-  next();
 };
 
 //middleware for validation
