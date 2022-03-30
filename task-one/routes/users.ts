@@ -18,7 +18,7 @@ import express,{Request, Response,NextFunction} from"express";
 
 
 
-import {getAll,getSingle, createData, updateData, deleteData, checkID, validation} from"../controllers/data"
+import {getAll,getSingle, createData, updateData, deleteData, checkID, validation} from"../controllers/dataControllers"
 
 
 

@@ -2,11 +2,11 @@
   "name": "week-6-task",
   "version": "0.0.0",
   "private": true,
-
   "scripts": {
-    "start": "yarn tsc && node lib/app.js",
-    "check": "nodemon app.js",
-    "build": "tsc"
+    "start": "yarn tsc && node bin/www",
+    "dev": "nodemon bin/www",
+    "build": "tsc",
+    "test": "jest"
   },
   "dependencies": {
     "@types/jest": "^27.4.1",
@@ -32,6 +32,7 @@
     "@types/http-errors": "^1.8.2",
     "@types/jade": "^0.0.31",
     "@types/morgan": "^1.9.3",
-    "@types/request": "^2.48.8"
+    "@types/request": "^2.48.8",
+    "jest": "^27.5.1"
   }
 }

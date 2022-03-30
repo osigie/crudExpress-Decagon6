@@ -2,46 +2,6 @@ import fs from "fs";
 import fss from "fs/promises";
 import express, { Request, Response, NextFunction } from "express";
 
-const pathOfData = "Database/dataBase.json";
-console.log(pathOfData);
-let isExit = fs.existsSync(pathOfData);
-
-if (!isExit) {
-  async function createFileImmediately() {
-    try {
-      await fss.writeFile(pathOfData, JSON.stringify([]));
-    } catch (err) {
-      console.error("Error occured while reading directory!", err);
-    }
-  }
-  createFileImmediately();
-}
-
-// if (!isExit) {
-//   fs.writeFileSync(pathOfData, JSON.stringify([]));
-// }
-
-let dB = JSON.parse(fs.readFileSync(pathOfData, "utf8"));
-
-// const result = []
-// let dB = fs.readFile(`${__dirname}/../Database/dataBase.json`,(err, data) => {
-//     if(err){
-//         console.log(err)
-//     }
-// })
-
-// let dataBase =  fss.readFile(pathOfData, "utf8");
-
-// const readFile = async ()=> {
-//   try {
-//     const data =  fss.readFile(pathOfData, "utf8")
-// return data
-//   }
-//   catch(err) {
-//     console.log(err)
-//   }
-// }
-
 interface DataBaseObject {
   organization: string;
   createdAt: string;
@@ -56,28 +16,55 @@ interface DataBaseObject {
   employees: string[];
 }
 
-export const getAll = (req: Request, res: Response) => {
+const pathOfData = "Database/dataBase.json";
+
+let isExit = fs.existsSync(pathOfData);
+
+if (!isExit) {
+  async function createFileImmediately() {
+    try {
+      await fss.writeFile(pathOfData, JSON.stringify([]));
+    } catch (err) {
+      console.error("Error occured while reading directory!", err);
+    }
+  }
+  createFileImmediately();
+}
+
+const reader = async () => {
+  let dB: string = "";
+  try {
+    dB = await fss.readFile(pathOfData, { encoding: "utf-8" });
+  } catch (err) {
+    console.log(err);
+  }
+  return JSON.parse(dB);
+};
+
+export const getAll = async (req: Request, res: Response) => {
+  const dB = await reader();
   res.status(200).json({
     status: "succes",
-    result: dB.length,
     data: {
       dB,
     },
   });
 };
 
-export const getSingle = (req: Request, res: Response) => {
+export const getSingle = async (req: Request, res: Response) => {
+  const dB = await reader();
   const id: number = Number(req.params.id);
   const singleDb = dB.find((el: DataBaseObject) => el.id === id);
   res.status(200).json({
     status: "succes",
     data: {
-      singleDb,
+      singleData: singleDb,
     },
   });
 };
 
-export const createData = (req: Request, res: Response) => {
+export const createData = async (req: Request, res: Response) => {
+  const dB = await reader();
   let id;
   if (dB.length == 0) {
     id = 1;
@@ -103,12 +90,14 @@ export const createData = (req: Request, res: Response) => {
 };
 
 export const updateData = async (req: Request, res: Response) => {
+  const dB = await reader();
   const id: number = Number(req.params.id);
   const index = dB.findIndex((p: DataBaseObject) => p.id === id);
 
   let sample = {
     ...dB[index],
     ...req.body,
+    createdAt: dB[index].createdAt,
     id,
     updatedAt: new Date().toISOString(),
   };
@@ -124,6 +113,7 @@ export const updateData = async (req: Request, res: Response) => {
 };
 
 export const deleteData = async (req: Request, res: Response) => {
+  let dB = await reader();
   const id: number = Number(req.params.id);
   dB = dB.filter((el: DataBaseObject) => el.id !== id);
   fs.writeFile(pathOfData, JSON.stringify(dB, null, 3), (err) => {
@@ -140,6 +130,7 @@ export const checkID = async (
   res: Response,
   next: NextFunction
 ) => {
+  const dB = await reader();
   const id: number = Number(req.params.id);
   if (!dB.some((el: DataBaseObject) => el.id === id)) {
     return res.status(404).json({
