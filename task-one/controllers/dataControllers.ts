@@ -53,6 +53,7 @@ export const getAll = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
   }
+
 };
 
 export const getSingle = async (req: Request, res: Response) => {
@@ -69,6 +70,7 @@ export const getSingle = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
   }
+ 
 };
 
 export const createData = async (req: Request, res: Response) => {
@@ -86,7 +88,7 @@ export const createData = async (req: Request, res: Response) => {
       { updatedAt: new Date().toISOString() },
       { id: id }
     );
-
+  
     dB.push(newObj);
     fs.writeFile(pathOfData, JSON.stringify(dB, null, 3), (err) => {
       res.status(201).json({
@@ -99,6 +101,7 @@ export const createData = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
   }
+
 };
 
 export const updateData = async (req: Request, res: Response) => {
@@ -106,7 +109,7 @@ export const updateData = async (req: Request, res: Response) => {
     const dB = await reader();
     const id: number = Number(req.params.id);
     const index = dB.findIndex((p: DataBaseObject) => p.id === id);
-
+  
     let sample = {
       ...dB[index],
       ...req.body,
@@ -126,6 +129,7 @@ export const updateData = async (req: Request, res: Response) => {
   } catch (error) {
     console.log(error);
   }
+
 };
 
 export const deleteData = async (req: Request, res: Response) => {
@@ -140,8 +144,9 @@ export const deleteData = async (req: Request, res: Response) => {
       });
     });
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
+
 };
 
 //Creating Middleware for wrong ID
@@ -161,8 +166,9 @@ export const checkID = async (
     }
     next();
   } catch (error) {
-    console.log(error);
+    console.log(error)
   }
+ 
 };
 
 //middleware for validation
@@ -177,8 +183,8 @@ export const validation = (req: Request, res: Response, next: NextFunction) => {
     typeof req.body.noOfEmployees !== "number" ||
     !Array.isArray(req.body.employees) ||
     typeof req.body.createdAt !== "string" ||
-    typeof req.body.updatedAt !== "string" ||
-    typeof req.body.id !== "number"
+    typeof req.body.updatedAt !== "string" 
+    ||typeof req.body.id !== "number"
   ) {
     return res.status(404).json({
       status: "failed",
